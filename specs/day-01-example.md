@@ -1,10 +1,10 @@
-# Day 01: [Placeholder - Awaiting AoC 2025 Day 1]
+# Day 01: [Placeholder - Awaiting AoC 2025 Day 01]
 
-> **Note**: This is an example spec to demonstrate the format. The actual Day 1 puzzle will be available when Advent of Code 2025 begins on December 1, 2025.
+> **Note**: This is an example spec to demonstrate the format. The actual Day 01 puzzle will be available when Advent of Code 2025 begins on December 1, 2025.
 
 ## Problem Description
 
-[This section will contain a clear, concise description of the Day 1 problem once it's released]
+[This section will contain a clear, concise description of the Day 01 problem once it's released]
 
 ## Input Format
 
@@ -82,7 +82,7 @@ The solution should pass the following test cases:
 
 ## How to Use This Spec
 
-Once the Day 1 puzzle is released:
+Once the Day 01 puzzle is released:
 
 1. Update this spec with the actual problem details
 2. Add concrete examples from the puzzle description

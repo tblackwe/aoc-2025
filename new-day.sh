@@ -3,6 +3,17 @@
 
 set -e
 
+# Helper function for cross-platform sed replacement
+sed_inplace() {
+    local pattern=$1
+    local file=$2
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        sed -i '' "$pattern" "$file"
+    else
+        sed -i "$pattern" "$file"
+    fi
+}
+
 # Check if day number is provided
 if [ -z "$1" ]; then
     echo "Usage: ./new-day.sh <day-number>"
@@ -22,12 +33,8 @@ if [ -f "$SPEC_FILE" ]; then
     echo "❌ Spec already exists: $SPEC_FILE"
 else
     cp templates/spec-template.md "$SPEC_FILE"
-    # Replace XX with the day number (compatible with both Linux and macOS)
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        sed -i '' "s/XX/$DAY_FORMATTED/g" "$SPEC_FILE"
-    else
-        sed -i "s/XX/$DAY_FORMATTED/g" "$SPEC_FILE"
-    fi
+    # Replace XX with the day number
+    sed_inplace "s/XX/$DAY_FORMATTED/g" "$SPEC_FILE"
     echo "✅ Created spec: $SPEC_FILE"
 fi
 
@@ -42,14 +49,9 @@ else
     cp templates/solution-template.py "$SOLUTION_DIR/solution.py"
     cp templates/test-template.py "$SOLUTION_DIR/test_solution.py"
     
-    # Replace XX with the day number (compatible with both Linux and macOS)
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        sed -i '' "s/XX/$DAY_FORMATTED/g" "$SOLUTION_DIR/solution.py"
-        sed -i '' "s/XX/$DAY_FORMATTED/g" "$SOLUTION_DIR/test_solution.py"
-    else
-        sed -i "s/XX/$DAY_FORMATTED/g" "$SOLUTION_DIR/solution.py"
-        sed -i "s/XX/$DAY_FORMATTED/g" "$SOLUTION_DIR/test_solution.py"
-    fi
+    # Replace XX with the day number
+    sed_inplace "s/XX/$DAY_FORMATTED/g" "$SOLUTION_DIR/solution.py"
+    sed_inplace "s/XX/$DAY_FORMATTED/g" "$SOLUTION_DIR/test_solution.py"
     
     # Create README
     cat > "$SOLUTION_DIR/README.md" << EOF
