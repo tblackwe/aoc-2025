@@ -68,6 +68,6 @@ The key is the spec-driven approach, not the specific tool.
 
 ## Learn More
 
-- [Opencode Documentation](https://github.com/opencode-ai/opencode) (example link)
+- Opencode Documentation: Check your agent manager's documentation for specific setup instructions
 - See [../CONTRIBUTING.md](../CONTRIBUTING.md) for workflow details
 - Check [../QUICKSTART.md](../QUICKSTART.md) for quick start guide

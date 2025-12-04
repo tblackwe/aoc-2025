@@ -22,8 +22,12 @@ if [ -f "$SPEC_FILE" ]; then
     echo "❌ Spec already exists: $SPEC_FILE"
 else
     cp templates/spec-template.md "$SPEC_FILE"
-    # Replace XX with the day number
-    sed -i "s/XX/$DAY_FORMATTED/g" "$SPEC_FILE"
+    # Replace XX with the day number (compatible with both Linux and macOS)
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        sed -i '' "s/XX/$DAY_FORMATTED/g" "$SPEC_FILE"
+    else
+        sed -i "s/XX/$DAY_FORMATTED/g" "$SPEC_FILE"
+    fi
     echo "✅ Created spec: $SPEC_FILE"
 fi
 
@@ -38,9 +42,14 @@ else
     cp templates/solution-template.py "$SOLUTION_DIR/solution.py"
     cp templates/test-template.py "$SOLUTION_DIR/test_solution.py"
     
-    # Replace XX with the day number
-    sed -i "s/XX/$DAY_FORMATTED/g" "$SOLUTION_DIR/solution.py"
-    sed -i "s/XX/$DAY_FORMATTED/g" "$SOLUTION_DIR/test_solution.py"
+    # Replace XX with the day number (compatible with both Linux and macOS)
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        sed -i '' "s/XX/$DAY_FORMATTED/g" "$SOLUTION_DIR/solution.py"
+        sed -i '' "s/XX/$DAY_FORMATTED/g" "$SOLUTION_DIR/test_solution.py"
+    else
+        sed -i "s/XX/$DAY_FORMATTED/g" "$SOLUTION_DIR/solution.py"
+        sed -i "s/XX/$DAY_FORMATTED/g" "$SOLUTION_DIR/test_solution.py"
+    fi
     
     # Create README
     cat > "$SOLUTION_DIR/README.md" << EOF
