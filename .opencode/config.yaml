@@ -1,0 +1,44 @@
+# Opencode Agent Manager Configuration
+# This file configures how AI agents interact with the project
+
+project:
+  name: "Advent of Code 2025"
+  description: "Spec-driven development for AoC 2025 puzzles"
+
+agents:
+  # Default agent configuration for solving puzzles
+  default:
+    model: "gpt-4"  # or your preferred model
+    temperature: 0.2
+    max_tokens: 4000
+    
+workflow:
+  # Spec-driven workflow configuration
+  spec_directory: "specs"
+  solution_directory: "solutions"
+  template_directory: "templates"
+  
+  # When assigning a spec to an agent
+  assignment:
+    # Include these files in the agent context
+    include:
+      - "templates/solution-template.py"
+      - "templates/test-template.py"
+    
+    # Instructions for the agent
+    instructions: |
+      You are tasked with implementing a solution for an Advent of Code puzzle.
+      
+      Please:
+      1. Read the specification carefully
+      2. Implement the solution following the template structure
+      3. Write comprehensive tests based on the examples in the spec
+      4. Ensure all edge cases are handled
+      5. Optimize for clarity and correctness over performance (unless specified)
+      
+      Your solution should be placed in the solutions/day-XX/ directory.
+
+validation:
+  # Run tests after solution is generated
+  run_tests: true
+  test_command: "python3 -m unittest test_solution.py"
