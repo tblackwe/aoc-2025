@@ -1,4 +1,4 @@
-# Day 01: [Placeholder - Awaiting AoC 2025 Day 01]
+# Day 01: TBD - Example Spec Template
 
 > **Note**: This is an example spec to demonstrate the format. The actual Day 01 puzzle will be available when Advent of Code 2025 begins on December 1, 2025.
 

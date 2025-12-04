@@ -3,8 +3,8 @@
 
 set -e
 
-# Helper function for cross-platform sed replacement
-sed_inplace() {
+# Helper function for cross-platform in-place sed replacement
+replace_in_file() {
     local pattern=$1
     local file=$2
     if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -34,7 +34,7 @@ if [ -f "$SPEC_FILE" ]; then
 else
     cp templates/spec-template.md "$SPEC_FILE"
     # Replace XX with the day number
-    sed_inplace "s/XX/$DAY_FORMATTED/g" "$SPEC_FILE"
+    replace_in_file "s/XX/$DAY_FORMATTED/g" "$SPEC_FILE"
     echo "✅ Created spec: $SPEC_FILE"
 fi
 
@@ -50,8 +50,8 @@ else
     cp templates/test-template.py "$SOLUTION_DIR/test_solution.py"
     
     # Replace XX with the day number
-    sed_inplace "s/XX/$DAY_FORMATTED/g" "$SOLUTION_DIR/solution.py"
-    sed_inplace "s/XX/$DAY_FORMATTED/g" "$SOLUTION_DIR/test_solution.py"
+    replace_in_file "s/XX/$DAY_FORMATTED/g" "$SOLUTION_DIR/solution.py"
+    replace_in_file "s/XX/$DAY_FORMATTED/g" "$SOLUTION_DIR/test_solution.py"
     
     # Create README
     cat > "$SOLUTION_DIR/README.md" << EOF
