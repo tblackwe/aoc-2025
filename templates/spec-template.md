@@ -2,99 +2,75 @@
 
 ## Problem Description
 
-[Provide a clear, concise description of the problem]
+[1-2 sentences describing the core mechanic. What are we tracking, transforming, or counting?]
+
+## Input
+
+The input is located in `input.txt`
 
 ## Input Format
 
-[Describe the format of the input data]
+[Describe the structure of each line/section]
 
 Example:
 ```
-[Example input]
+[3-5 lines of example input]
 ```
 
 ## Output Format
 
-[Describe what the solution should output]
+[What the solution should return]
 
 Example:
 ```
-[Example output]
+[Expected output for the example]
 ```
 
 ## Requirements
 
 ### Part 1
 
-[Detailed requirements for part 1 of the puzzle]
+[What exactly to compute/return]
 
-### Part 2 (if applicable)
-
-[Detailed requirements for part 2 of the puzzle]
-
-## Examples
-
-### Example 1
-
-**Input:**
-```
-[Example input]
-```
-
-**Expected Output:**
-```
-[Example output]
-```
+#### Part 1 Example Answer
+[answer]
 
 **Explanation:**
-[Explain why this is the expected output]
+[Step-by-step trace showing how to get from input to output]
 
-### Example 2 (if needed)
+### Part 2
 
-**Input:**
-```
-[Example input]
-```
+[What changes from Part 1 - often builds on Part 1 logic]
 
-**Expected Output:**
-```
-[Example output]
-```
+#### Part 2 Example Answer
+[answer]
 
 **Explanation:**
-[Explain why this is the expected output]
-
-## Edge Cases
-
-- [Edge case 1]
-- [Edge case 2]
-- [Edge case 3]
-
-## Constraints
-
-- [Constraint 1]
-- [Constraint 2]
-
-## Implementation Notes
-
-[Any specific notes for the implementation, such as:]
-- Preferred programming language(s)
-- Performance requirements
-- Code style preferences
-- Testing requirements
+[Step-by-step trace for Part 2, highlighting differences from Part 1]
 
 ## Test Cases
 
-The solution should pass the following test cases:
+### Part 1 Tests
 
-1. **Test Case 1**:
-   - Input: `[input]`
-   - Expected: `[output]`
+| Input | Expected | Notes |
+|-------|----------|-------|
+| `[main example]` | `[answer]` | Main example from problem |
+| `[simple case]` | `[answer]` | [why this case matters] |
+| `[edge case]` | `[answer]` | [boundary condition tested] |
 
-2. **Test Case 2**:
-   - Input: `[input]`
-   - Expected: `[output]`
+### Part 2 Tests
 
-3. **Test Case 3** (edge case):
-   - Input: `[input]`
-   - Expected: `[output]`
+| Input | Expected | Notes |
+|-------|----------|-------|
+| `[main example]` | `[answer]` | Main example |
+| `[edge case]` | `[answer]` | [what this tests] |
+
+### Step-by-Step Trace (for validation)
+
+For the main example, verify intermediate states:
+```
+[Initial state]
+[Step 1] → [result]
+[Step 2] → [result]  ← [notable event]
+...
+```

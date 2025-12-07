@@ -2,65 +2,87 @@
 """
 Advent of Code 2025 - Day XX: [Problem Title]
 
-Solution generated based on specification.
+[Brief description of the puzzle]
 """
 
-def parse_input(input_text):
+import sys
+from pathlib import Path
+
+
+def parse_input(input_text: str):
     """
     Parse the input text into a usable format.
-    
-    Args:
-        input_text (str): The raw input text
-        
-    Returns:
-        Parsed input data structure
+
+    [Describe input format]
     """
+    lines = input_text.strip().split('\n')
+    # TODO: implement parsing
     pass
 
 
-def solve_part1(data):
+def solve_part1(data) -> int:
     """
     Solve part 1 of the puzzle.
-    
-    Args:
-        data: Parsed input data
-        
-    Returns:
-        Solution for part 1
+
+    [Describe what part 1 computes]
     """
+    # TODO: implement part 1
     pass
 
 
-def solve_part2(data):
+def solve_part2(data) -> int | None:
     """
     Solve part 2 of the puzzle.
-    
-    Args:
-        data: Parsed input data
-        
-    Returns:
-        Solution for part 2
+
+    [Describe what part 2 computes]
     """
-    pass
+    # TODO: implement part 2
+    return None
 
 
 def main():
-    """Main entry point for the solution."""
-    # Read input from file
-    with open('input.txt', 'r') as f:
-        input_text = f.read()
-    
-    # Parse input
-    data = parse_input(input_text)
-    
-    # Solve part 1
-    result1 = solve_part1(data)
-    print(f"Part 1: {result1}")
-    
-    # Solve part 2
-    result2 = solve_part2(data)
-    print(f"Part 2: {result2}")
+    """Run the solution."""
+    input_file = Path(__file__).parent / 'input.txt'
+    data = parse_input(input_file.read_text())
+
+    print(f"Part 1: {solve_part1(data)}")
+
+    if (part2 := solve_part2(data)) is not None:
+        print(f"Part 2: {part2}")
+
+
+def test():
+    """
+    Run tests based on spec test cases.
+
+    Tests should match the Test Cases section in the spec file.
+    """
+    # === Part 1 Tests ===
+    print("Part 1 Tests:")
+
+    # Main example from spec
+    example = """[paste example input here]"""
+    assert solve_part1(parse_input(example)) == 0  # TODO: expected value
+    print("  ✓ Main example")
+
+    # TODO: Add more test cases from spec
+    # assert solve_part1(parse_input("[input]")) == [expected]
+    # print("  ✓ [test description]")
+
+    # === Part 2 Tests ===
+    print("\nPart 2 Tests:")
+
+    # Main example
+    assert solve_part2(parse_input(example)) == 0  # TODO: expected value
+    print("  ✓ Main example")
+
+    # TODO: Add more test cases from spec
+
+    print("\n✅ All tests passed!")
 
 
 if __name__ == '__main__':
-    main()
+    if len(sys.argv) > 1 and sys.argv[1] == 'test':
+        test()
+    else:
+        main()
