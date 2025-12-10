@@ -82,14 +82,48 @@ The script orchestrates three AI agents in sequence:
 - Refactors code for quality
 - Verifies final test suite passes
 
+### Stage 4: Git Commit
+**Purpose**: Commit changes to version control
+
+**What it does**:
+- Stages spec, tests, and solution files
+- Creates descriptive commit message
+- Commits to the day's branch
+
+### Stage 5: Pull Request
+**Purpose**: Create PR for code review
+
+**What it does**:
+- Pushes branch to remote
+- Creates PR with comprehensive description
+- Includes workflow summary and test results
+- Ready for review and merge
+
 ## Models Available
 
-| Model | Provider | Best For |
-|-------|----------|----------|
-| `gpt-4o` | OpenAI | General problem solving, balanced performance |
-| `claude-3.5-sonnet` | Anthropic | Deep reasoning, complex algorithms |
-| `gemini-2.0-flash` | Google | Fast execution, straightforward problems |
-| `o1-preview` | OpenAI | Advanced reasoning, optimization |
+Based on [GitHub Copilot supported models](https://docs.github.com/en/copilot/reference/ai-models/supported-models):
+
+### OpenAI Models
+- `gpt-5.1-codex` - **Recommended for AoC** - Latest coding-focused model
+- `gpt-5.1-codex-max` - Maximum capability for complex problems
+- `gpt-5.1-codex-mini` - Fast, low-cost option
+- `gpt-5.1` - Latest general model
+- `gpt-5` - Stable general model
+- `gpt-5-mini` - Fast, economical choice
+
+### Anthropic Models
+- `claude-sonnet-4.5` - **Recommended for reasoning** - Best balance
+- `claude-opus-4.5` - Maximum capability (higher cost)
+- `claude-sonnet-4` - Reliable performance
+- `claude-haiku-4.5` - Fast, economical choice
+
+### Google Models
+- `gemini-2.5-pro` - Solid all-around performance
+- `gemini-3-pro` - Latest (public preview)
+
+### Other Models
+- `grok-code-fast-1` - xAI's fast coding model (complimentary)
+- `raptor-mini` - Fine-tuned GPT-5 mini (free)
 
 ## Prerequisites
 

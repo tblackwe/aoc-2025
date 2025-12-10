@@ -42,6 +42,34 @@ class Colors:
 class AoCWorkflow:
     """Orchestrates the TDD workflow for solving AoC puzzles."""
     
+    # Supported models from GitHub Copilot
+    # https://docs.github.com/en/copilot/reference/ai-models/supported-models
+    SUPPORTED_MODELS = {
+        # OpenAI models
+        'gpt-4.1': 'GPT-4.1',
+        'gpt-4o': 'GPT-4o (legacy)',
+        'gpt-5': 'GPT-5',
+        'gpt-5-mini': 'GPT-5 mini',
+        'gpt-5-codex': 'GPT-5-Codex',
+        'gpt-5.1': 'GPT-5.1',
+        'gpt-5.1-codex': 'GPT-5.1-Codex',
+        'gpt-5.1-codex-mini': 'GPT-5.1-Codex-Mini',
+        'gpt-5.1-codex-max': 'GPT-5.1-Codex-Max',
+        # Anthropic models
+        'claude-haiku-4.5': 'Claude Haiku 4.5',
+        'claude-opus-4.1': 'Claude Opus 4.1',
+        'claude-opus-4.5': 'Claude Opus 4.5',
+        'claude-sonnet-4': 'Claude Sonnet 4',
+        'claude-sonnet-4.5': 'Claude Sonnet 4.5',
+        # Google models
+        'gemini-2.5-pro': 'Gemini 2.5 Pro',
+        'gemini-3-pro': 'Gemini 3 Pro',
+        # xAI models
+        'grok-code-fast-1': 'Grok Code Fast 1',
+        # Fine-tuned models
+        'raptor-mini': 'Raptor mini',
+    }
+    
     def __init__(self, day: int, model: str, year: int = 2025):
         self.day = day
         self.day_str = f"{day:02d}"
@@ -49,6 +77,7 @@ class AoCWorkflow:
         self.year = year
         self.puzzle_url = f"https://adventofcode.com/{year}/day/{day}"
         self.input_url = f"{self.puzzle_url}/input"
+        self.branch_name = f"day-{self.day_str}"
         
         # File paths
         self.spec_file = Path(f"specs/day-{self.day_str}.md")
@@ -62,7 +91,8 @@ class AoCWorkflow:
         self.results = {
             'day': day,
             'model': model,
-            'stages': {}
+            'stages': {},
+            'branch': self.branch_name
         }
     
     def print_header(self, text: str):
@@ -104,6 +134,39 @@ class AoCWorkflow:
             return True, result.stdout
         except subprocess.CalledProcessError as e:
             return False, e.stderr
+    
+    def create_git_branch(self) -> bool:
+        """Create a new Git branch for this day."""
+        self.print_step(f"Creating Git branch: {self.branch_name}", "info")
+        
+        # Check if we're in a git repo
+        success, _ = self.run_command(['git', 'rev-parse', '--git-dir'], "Checking Git repository")
+        if not success:
+            self.print_step("Not in a Git repository - skipping branch creation", "warning")
+            return False
+        
+        # Check current branch
+        success, current_branch = self.run_command(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], "Getting current branch")
+        if success:
+            current_branch = current_branch.strip()
+            self.print_step(f"Current branch: {current_branch}", "info")
+        
+        # Check if branch already exists
+        success, _ = self.run_command(['git', 'rev-parse', '--verify', self.branch_name], "Checking if branch exists")
+        if success:
+            self.print_step(f"Branch {self.branch_name} already exists - checking out", "warning")
+            success, _ = self.run_command(['git', 'checkout', self.branch_name], f"Checking out {self.branch_name}")
+            return success
+        
+        # Create new branch
+        success, _ = self.run_command(['git', 'checkout', '-b', self.branch_name], f"Creating branch {self.branch_name}")
+        if success:
+            self.print_step(f"Created and checked out branch: {self.branch_name}", "success")
+            self.results['branch_created'] = True
+            return True
+        else:
+            self.print_step("Failed to create branch", "error")
+            return False
     
     def create_directory_structure(self):
         """Create the directory structure for the day."""
@@ -448,12 +511,19 @@ Your goal: Make all Part 1 tests pass!
                 print(f"  ✗ {file_path} (not created)")
         print()
         
+        # Print PR info if available
+        if 'pr_url' in self.results:
+            print(f"{Colors.BOLD}Pull Request:{Colors.ENDC}")
+            print(f"  {self.results['pr_url']}")
+            print()
+        
         print(f"{Colors.BOLD}Next Steps:{Colors.ENDC}")
-        print(f"  1. Review the generated files")
+        print(f"  1. Review the pull request and generated files")
         print(f"  2. Run tests: cd {self.solution_dir} && python3 -m unittest test_solution.py")
         print(f"  3. Run solution: cd {self.solution_dir} && python3 solution.py")
         print(f"  4. Submit Part 1 answer to {self.puzzle_url}")
-        print(f"  5. After Part 2 unlocks, update spec and repeat workflow")
+        print(f"  5. Merge PR after verification")
+        print(f"  6. After Part 2 unlocks, update spec and repeat workflow")
         print()
         
         # Save results
@@ -476,15 +546,21 @@ Examples:
   %(prog)s 25 gemini-2.0-flash
 
 The workflow orchestrates:
-  1. Architect - Fetches puzzle and creates comprehensive spec
-  2. SDET - Reviews spec and creates comprehensive tests (TDD)
-  3. Implementer - Implements Part 1 solution to make tests pass
+  1. Creates Git branch (day-XX)
+  2. Architect - Fetches puzzle and creates comprehensive spec
+  3. SDET - Reviews spec and creates comprehensive tests (TDD)
+  4. Implementer - Implements Part 1 solution to make tests pass
+  5. Commits changes to Git
+  6. Creates pull request
 
-Models available (via GitHub Copilot):
-  - gpt-4o
-  - claude-3.5-sonnet
-  - gemini-2.0-flash
-  - o1-preview
+Supported models (via GitHub Copilot):
+  OpenAI: gpt-4.1, gpt-5, gpt-5-mini, gpt-5-codex, gpt-5.1, gpt-5.1-codex, 
+          gpt-5.1-codex-mini, gpt-5.1-codex-max
+  Anthropic: claude-haiku-4.5, claude-sonnet-4, claude-sonnet-4.5,
+             claude-opus-4.1, claude-opus-4.5
+  Google: gemini-2.5-pro, gemini-3-pro
+  xAI: grok-code-fast-1
+  Fine-tuned: raptor-mini
         """
     )
     
