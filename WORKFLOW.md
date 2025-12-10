@@ -9,14 +9,14 @@
 ## Examples
 
 ```bash
-# Solve day 5 using GPT-4o
-./solve-day.py 5 gpt-4o
+# Solve day 5 using latest OpenAI Codex model
+./solve-day.py 5 gpt-5.1-codex
 
-# Solve day 12 using Claude 3.5 Sonnet
-./solve-day.py 12 claude-3.5-sonnet
+# Solve day 12 using Claude Sonnet 4.5
+./solve-day.py 12 claude-sonnet-4.5
 
-# Solve day 25 using Gemini 2.0 Flash
-./solve-day.py 25 gemini-2.0-flash --year 2025
+# Solve day 25 using OpenCode Zen Big Pickle
+./solve-day.py 25 big-pickle --year 2025
 ```
 
 ## Workflow Stages
@@ -124,6 +124,9 @@ Based on [GitHub Copilot supported models](https://docs.github.com/en/copilot/re
 ### Other Models
 - `grok-code-fast-1` - xAI's fast coding model (complimentary)
 - `raptor-mini` - Fine-tuned GPT-5 mini (free)
+
+### OpenCode Zen Models
+- `big-pickle` - **OpenCode Zen's flagship model** - Specialized for complex reasoning and code generation
 
 ## Prerequisites
 

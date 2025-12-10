@@ -22,9 +22,9 @@ Solve any day's puzzle with a single command:
 
 Examples:
 ```bash
-./solve-day.py 5 gpt-4o
-./solve-day.py 12 claude-3.5-sonnet
-./solve-day.py 25 gemini-2.0-flash
+./solve-day.py 5 gpt-5.1-codex
+./solve-day.py 12 claude-sonnet-4.5
+./solve-day.py 25 big-pickle
 ```
 
 The script will orchestrate the complete TDD workflow automatically!
@@ -80,10 +80,14 @@ The `solve-day.py` script orchestrates the complete TDD workflow:
 
 ### Available Models
 
-- `gpt-4o` - Latest GPT-4 optimized model
-- `claude-3.5-sonnet` - Anthropic's reasoning model
-- `gemini-2.0-flash` - Google's fast model
-- `o1-preview` - OpenAI's reasoning model
+**Recommended Models:**
+- `gpt-5.1-codex` - Latest OpenAI coding-focused model
+- `claude-sonnet-4.5` - Anthropic's balanced reasoning model
+- `big-pickle` - OpenCode Zen's flagship model
+- `gemini-2.5-pro` - Google's latest model
+
+**Other Options:**
+- See [WORKFLOW.md](WORKFLOW.md) for complete model list with 25+ options
 
 ## Manual Workflow
 

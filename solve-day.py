@@ -42,7 +42,7 @@ class Colors:
 class AoCWorkflow:
     """Orchestrates the TDD workflow for solving AoC puzzles."""
     
-    # Supported models from GitHub Copilot
+    # Supported models from GitHub Copilot and OpenCode Zen
     # https://docs.github.com/en/copilot/reference/ai-models/supported-models
     SUPPORTED_MODELS = {
         # OpenAI models
@@ -68,6 +68,8 @@ class AoCWorkflow:
         'grok-code-fast-1': 'Grok Code Fast 1',
         # Fine-tuned models
         'raptor-mini': 'Raptor mini',
+        # OpenCode Zen models
+        'big-pickle': 'Big Pickle (OpenCode Zen)',
     }
     
     def __init__(self, day: int, model: str, year: int = 2025):
@@ -553,7 +555,7 @@ The workflow orchestrates:
   5. Commits changes to Git
   6. Creates pull request
 
-Supported models (via GitHub Copilot):
+Supported models:
   OpenAI: gpt-4.1, gpt-5, gpt-5-mini, gpt-5-codex, gpt-5.1, gpt-5.1-codex, 
           gpt-5.1-codex-mini, gpt-5.1-codex-max
   Anthropic: claude-haiku-4.5, claude-sonnet-4, claude-sonnet-4.5,
@@ -561,6 +563,7 @@ Supported models (via GitHub Copilot):
   Google: gemini-2.5-pro, gemini-3-pro
   xAI: grok-code-fast-1
   Fine-tuned: raptor-mini
+  OpenCode Zen: big-pickle
         """
     )
     
