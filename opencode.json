@@ -53,11 +53,11 @@
         "webfetch": true
       }
     },
-    "aoc-helper": {
+    "implementer": {
       "mode": "subagent",
-      "description": "Specialized assistant for Advent of Code puzzles - helps with understanding requirements, suggesting algorithms, and optimizing solutions",
+      "description": "Solution implementer for Advent of Code puzzles - writes code based on specs and makes tests pass",
       "temperature": 0.4,
-      "prompt": "{file:./.opencode/prompts/aoc-helper.txt}",
+      "prompt": "{file:./.opencode/prompts/implementer.txt}",
       "tools": {
         "write": true,
         "edit": true,
@@ -97,6 +97,21 @@
         "edit": true,
         "bash": true,
         "read": true,
+        "grep": true
+      }
+    },
+    "sdet": {
+      "mode": "subagent",
+      "description": "Software Development Engineer in Test - implements comprehensive unit tests following TDD principles",
+      "temperature": 0.3,
+      "prompt": "{file:./.opencode/prompts/sdet.txt}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true,
+        "read": true,
+        "list": true,
+        "glob": true,
         "grep": true
       }
     }

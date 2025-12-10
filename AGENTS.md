@@ -84,13 +84,15 @@ This agent's primary responsibility is to:
 
 Use this agent at the start of each new puzzle to create a solid foundation before implementation.
 
-### AoC Helper
+### Implementer
 **Mode**: subagent  
-**Description**: Specialized assistant for Advent of Code puzzles - implements solutions.
+**Description**: Solution implementer for Advent of Code puzzles - writes code based on specs and makes tests pass.
 
 This agent helps with:
 - Understanding puzzle requirements from specs
-- Implementing solutions based on architect specs
+- Implementing solutions based on architect specs and test cases
+- Following TDD by making failing tests pass
+- Writing clean, well-commented Python code
 - Suggesting algorithmic approaches
 - Explaining common AoC patterns (BFS, DFS, dynamic programming, etc.)
 - Identifying edge cases in puzzle inputs
@@ -132,6 +134,49 @@ This agent:
 - `write`: true (can optimize solution files)
 - `edit`: true (can refactor code)
 - `bash`: true (runs benchmarks and tests)
+
+### SDET
+**Mode**: subagent  
+**Description**: Software Development Engineer in Test - implements comprehensive unit tests following TDD principles.
+
+This agent's primary responsibility is to:
+1. **Review specifications**: Read and analyze the spec file in `specs/day-XX.md` to understand:
+   - Problem requirements and constraints
+   - Expected inputs and outputs
+   - Example test cases provided in the puzzle
+   - Part 1 and Part 2 requirements
+2. **Implement unit tests**: Create comprehensive test suites in `solutions/day-XX/test_solution.py` including:
+   - Tests for example inputs from the spec (with expected outputs)
+   - Tests for parsing functions
+   - Tests for Part 1 and Part 2 solution functions
+   - Parameterized tests for multiple test cases
+   - Clear test names and documentation
+3. **Identify edge cases**: Think critically about boundary conditions and edge cases:
+   - Empty inputs or zero values
+   - Single element inputs
+   - Maximum/minimum values
+   - Invalid or malformed inputs
+   - Special patterns or corner cases specific to the puzzle
+4. **Design test data**: Create meaningful test inputs that cover:
+   - Happy path scenarios
+   - Boundary conditions
+   - Edge cases and error conditions
+   - Performance stress tests (if applicable)
+5. **Verify test coverage**: Ensure all critical paths and functions are tested
+
+**Output**: A complete test file (`test_solution.py`) that:
+- Contains all example test cases from the spec with correct expected values
+- Includes comprehensive edge case tests
+- Is ready to run before implementation (TDD approach)
+- Uses clear assertions and helpful error messages
+- Follows Python unittest best practices
+
+**Tools**:
+- `write`: true (creates test files)
+- `edit`: true (updates tests)
+- `bash`: true (can run tests to verify they fail before implementation)
+
+Use this agent after the Architect creates the spec and before implementing the solution to follow test-driven development practices.
 
 ## Common Tasks
 
