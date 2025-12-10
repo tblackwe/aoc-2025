@@ -49,12 +49,48 @@ Use this agent for:
 - Reviewing code structure
 - Discussing algorithm choices
 
+### Architect
+**Mode**: subagent  
+**Description**: Solution architect for Advent of Code puzzles - creates comprehensive specs and test plans.
+
+This agent's primary responsibility is to:
+1. **Analyze the puzzle**: Read and deeply understand the problem requirements
+2. **Create detailed specs**: Write comprehensive specifications in `specs/day-XX.md` including:
+   - Clear problem description with examples
+   - Input/output format specifications
+   - Step-by-step explanation of the solution approach
+   - Part 1 and Part 2 requirements
+3. **Identify algorithms**: Analyze and document possible algorithmic approaches:
+   - Time and space complexity analysis
+   - Data structure recommendations
+   - Trade-offs between different approaches
+   - Common AoC patterns (BFS, DFS, DP, graph algorithms, etc.)
+4. **Design test plan**: Create comprehensive unit test strategy:
+   - Example test cases from the puzzle
+   - Edge cases and boundary conditions
+   - Simple cases for validation
+   - Test data with expected outputs
+
+**Output**: A complete specification document that includes:
+- Problem statement and examples
+- Algorithm analysis and recommendations
+- Detailed test plan with test cases
+- Implementation guidance and gotchas
+
+**Tools**:
+- `write`: true (creates spec files)
+- `edit`: true (updates specs)
+- `bash`: false (read-only analysis)
+
+Use this agent at the start of each new puzzle to create a solid foundation before implementation.
+
 ### AoC Helper
 **Mode**: subagent  
-**Description**: Specialized assistant for Advent of Code puzzles.
+**Description**: Specialized assistant for Advent of Code puzzles - implements solutions.
 
 This agent helps with:
 - Understanding puzzle requirements from specs
+- Implementing solutions based on architect specs
 - Suggesting algorithmic approaches
 - Explaining common AoC patterns (BFS, DFS, dynamic programming, etc.)
 - Identifying edge cases in puzzle inputs
@@ -79,6 +115,23 @@ This agent:
 - `write`: false
 - `edit`: false
 - `bash`: true (limited to running Python scripts)
+
+### Optimizer
+**Mode**: subagent  
+**Description**: Analyzes and optimizes solution performance for time and space complexity.
+
+This agent:
+- Reviews existing solutions for performance bottlenecks
+- Analyzes time and space complexity
+- Suggests algorithmic improvements
+- Implements optimizations while maintaining correctness
+- Benchmarks performance improvements
+- Documents trade-offs and optimization strategies
+
+**Tools**:
+- `write`: true (can optimize solution files)
+- `edit`: true (can refactor code)
+- `bash`: true (runs benchmarks and tests)
 
 ## Common Tasks
 
