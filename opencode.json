@@ -1,0 +1,104 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "build": {
+      "mode": "primary",
+      "description": "Default agent for implementing puzzle solutions with full tool access",
+      "temperature": 0.3,
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true,
+        "read": true,
+        "list": true,
+        "glob": true,
+        "grep": true
+      },
+      "permission": {
+        "bash": {
+          "rm -rf *": "deny",
+          "git push": "ask",
+          "git commit": "allow",
+          "*": "allow"
+        }
+      }
+    },
+    "plan": {
+      "mode": "primary",
+      "description": "Planning and analysis mode without making code changes",
+      "temperature": 0.1,
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": false,
+        "read": true,
+        "list": true,
+        "glob": true,
+        "grep": true
+      }
+    },
+    "architect": {
+      "mode": "subagent",
+      "description": "Solution architect for Advent of Code puzzles - creates comprehensive specs and test plans",
+      "temperature": 0.3,
+      "prompt": "{file:./.opencode/prompts/architect.txt}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": false,
+        "read": true,
+        "list": true,
+        "glob": true,
+        "grep": true,
+        "webfetch": true
+      }
+    },
+    "aoc-helper": {
+      "mode": "subagent",
+      "description": "Specialized assistant for Advent of Code puzzles - helps with understanding requirements, suggesting algorithms, and optimizing solutions",
+      "temperature": 0.4,
+      "prompt": "{file:./.opencode/prompts/aoc-helper.txt}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true,
+        "read": true,
+        "list": true,
+        "glob": true,
+        "grep": true
+      }
+    },
+    "test-runner": {
+      "mode": "subagent",
+      "description": "Runs and validates puzzle solutions against expected outputs",
+      "temperature": 0.1,
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": true,
+        "read": true
+      },
+      "permission": {
+        "bash": {
+          "python*": "allow",
+          "cat": "allow",
+          "ls": "allow",
+          "*": "deny"
+        }
+      }
+    },
+    "optimizer": {
+      "mode": "subagent",
+      "description": "Analyzes and optimizes solution performance for time and space complexity",
+      "temperature": 0.2,
+      "prompt": "{file:./.opencode/prompts/optimizer.txt}",
+      "tools": {
+        "write": false,
+        "edit": true,
+        "bash": true,
+        "read": true,
+        "grep": true
+      }
+    }
+  }
+}
