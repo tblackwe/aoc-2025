@@ -1,14 +1,33 @@
-# Advent of Code 2025 - Spec-Driven Development
+# Advent of Code 2025 - Test-Driven Development with AI Agents
 
-This repository explores **spec-driven development** for solving Advent of Code 2025 puzzles using AI agents.
+This repository uses a complete **Test-Driven Development (TDD) workflow** with AI agents to solve Advent of Code 2025 puzzles.
 
 ## Approach
 
-Instead of directly solving problems, this project uses a spec-driven workflow:
+This project orchestrates multiple AI agents in a TDD workflow:
 
-1. **Write a Specification**: For each day's puzzle, create a detailed specification in `specs/`
-2. **Assign to AI Agent**: Use the spec to assign the implementation to an AI agent (via Opencode)
-3. **Review & Iterate**: Review the AI-generated solution and refine as needed
+1. **Architect Agent**: Fetches the puzzle and creates a comprehensive specification
+2. **SDET Agent**: Reviews the spec and creates comprehensive unit tests (before implementation!)
+3. **Implementer Agent**: Writes code to make the tests pass (Red-Green-Refactor)
+4. **Test Runner**: Validates the solution
+5. **Optimizer**: Improves performance after correctness is established
+
+## Quick Start
+
+Solve any day's puzzle with a single command:
+
+```bash
+./solve-day.py <day> <model>
+```
+
+Examples:
+```bash
+./solve-day.py 5 gpt-4o
+./solve-day.py 12 claude-3.5-sonnet
+./solve-day.py 25 gemini-2.0-flash
+```
+
+The script will orchestrate the complete TDD workflow automatically!
 
 ## Directory Structure
 
@@ -20,46 +39,109 @@ aoc-2025/
 └── .opencode/      # Configuration for Opencode agent manager
 ```
 
-## Getting Started
+## Automated Workflow Script
 
-### Creating a New Spec
-
-Use the spec template to create a specification for a day's puzzle:
+The `solve-day.py` script orchestrates the complete TDD workflow:
 
 ```bash
-cp templates/spec-template.md specs/day-XX.md
+./solve-day.py <day> <model>
 ```
 
-Edit the spec file to include:
-- Problem description
-- Input/output examples
-- Expected behavior
-- Constraints and edge cases
+### What It Does
 
-### Assigning to an AI Agent
+**Stage 1: Architect**
+- Fetches the puzzle from adventofcode.com
+- Analyzes the problem thoroughly
+- Creates a comprehensive specification in `specs/day-XX.md`
+- Includes algorithm analysis, data structures, and test plan
 
-Once you have a spec, you can assign it to an AI agent using Opencode:
+**Stage 2: SDET (Test-First!)**
+- Reviews the specification
+- Extracts example test cases with expected outputs
+- Identifies edge cases and boundary conditions
+- Creates comprehensive test suite in `test_solution.py`
+- Verifies tests fail (no implementation yet - RED phase)
+
+**Stage 3: Implementer**
+- Reviews the spec and tests
+- Implements `parse_input()` function
+- Implements `solve_part1()` to make tests pass (GREEN phase)
+- Refactors for code quality
+- Runs tests to verify Part 1 passes
+
+### Prerequisites
+
+1. **AoC Session Cookie** (optional, for auto-fetching input):
+   ```bash
+   echo "your_session_cookie" > ~/.adventofcode.session
+   ```
+   
+2. **OpenCode** with configured agents (see `AGENTS.md`)
+
+### Available Models
+
+- `gpt-4o` - Latest GPT-4 optimized model
+- `claude-3.5-sonnet` - Anthropic's reasoning model
+- `gemini-2.0-flash` - Google's fast model
+- `o1-preview` - OpenAI's reasoning model
+
+## Manual Workflow
+
+If you prefer to run agents manually:
+
+### 1. Create Spec with Architect
 
 ```bash
-opencode assign specs/day-XX.md
+@architect Analyze day 5 puzzle at https://adventofcode.com/2025/day/5 and create spec
 ```
 
-### Directory Convention
+### 2. Create Tests with SDET
 
-- `specs/day-01.md` through `specs/day-25.md` - Daily puzzle specifications
-- `solutions/day-01/` through `solutions/day-25/` - Solution implementations
+```bash
+@sdet Review specs/day-05.md and create comprehensive tests
+```
 
-## Workflow Example
+### 3. Implement with Implementer
 
-1. Read the Advent of Code puzzle for the day
-2. Write a detailed spec in `specs/day-XX.md`
-3. Assign the spec to an AI agent
-4. Review and test the generated solution
-5. Iterate if needed
+```bash
+@implementer Review specs/day-05.md and tests, implement Part 1 solution
+```
 
-## Why Spec-Driven Development?
+## Directory Convention
 
-- **Clarity**: Forces clear thinking about the problem before implementation
-- **Delegation**: Enables effective collaboration with AI agents
-- **Documentation**: Serves as living documentation of problem requirements
-- **Learning**: Helps understand how well AI agents can interpret specifications
+```
+aoc-2025/
+├── specs/              # Specifications (created by Architect)
+│   ├── day-01.md
+│   ├── day-02.md
+│   └── ...
+├── solutions/          # Solutions (created by Implementer)
+│   ├── day-01/
+│   │   ├── solution.py
+│   │   ├── test_solution.py
+│   │   └── input.txt
+│   └── ...
+├── templates/          # Templates for new days
+└── .opencode/          # Agent configurations and prompts
+```
+
+## Why Test-Driven Development?
+
+- **Correctness First**: Tests define what "correct" means before writing code
+- **Confidence**: Green tests give confidence the solution is right
+- **Edge Cases**: SDET agent thinks critically about boundaries
+- **Refactoring**: Can improve code safely with test coverage
+- **Documentation**: Tests serve as executable specification
+- **AI Collaboration**: Clear contract between agents
+
+## Agent Roles
+
+See [AGENTS.md](AGENTS.md) for detailed information about each agent:
+
+- **Architect**: Problem analysis and spec creation
+- **SDET**: Comprehensive test implementation (TDD)
+- **Implementer**: Solution implementation (makes tests pass)
+- **Test Runner**: Solution validation
+- **Optimizer**: Performance improvement
+- **Build**: Full-access development mode
+- **Plan**: Read-only planning mode
