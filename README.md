@@ -76,6 +76,8 @@ The `solve-day.py` script orchestrates the complete TDD workflow:
    echo "your_session_cookie" > ~/.adventofcode.session
    ```
    
+   See [FETCH_INPUT.md](FETCH_INPUT.md) for detailed instructions on downloading puzzle inputs.
+   
 2. **OpenCode** with configured agents (see `AGENTS.md`)
 
 ### Available Models
